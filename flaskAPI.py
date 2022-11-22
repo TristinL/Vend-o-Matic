@@ -22,7 +22,7 @@ class Coin(Resource):
     def delete(self):
         global COINS
         temp_coins = COINS
-        Coins = 0
+        COINS = 0
         return Response("", status=204, mimetype='application/json', headers={'X-Coins': temp_coins})
 
 
