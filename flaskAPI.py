@@ -74,4 +74,4 @@ api.add_resource(Specific_inventory, "/inventory/<int:item_id>")
 
 #run the thing!
 if __name__ == "__main__":
-    app.run()
+    app.run(host='127.0.0.1', port=5001)

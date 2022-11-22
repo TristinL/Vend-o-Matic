@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  server-service:
+    build: ./
+    volumes:
+      - .:/APIwithJSON
+    ports:
+      - 5001:5001
