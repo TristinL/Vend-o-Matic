@@ -1,6 +1,6 @@
 from flask import Flask, Response
 import flask.scaffold
-flask.helpers._endpoint_from_view_func = flask.scaffold._endpoint_from_view_func
+flask.helpers._endpoint_from_view_func = flask.scaffold._endpoint_from_view_func  #monkey patch to deal with problem inherent in flask and docker
 from flask_restful import Resource, Api, reqparse, abort
 import json
 
@@ -13,12 +13,14 @@ coin_put_args.add_argument("coin", type=int, help="Incorrectly formatted data", 
 COINS = 0
 
 class Coin(Resource):
+    #add a coin to the system only if it matches the arguments required
     def put(self):
         coin_put_args.parse_args()
         global COINS
         COINS += 1
         return Response("", status=204, mimetype='application/json', headers={'X-Coins': COINS})
 
+    #return all coins and reset coins to zero
     def delete(self):
         global COINS
         temp_coins = COINS
@@ -56,8 +58,8 @@ class Specific_inventory(Resource):
         elif inventory[item_id] == 0:
             abort(Response("", status=404, mimetype='application/json', headers={'X-Coins': COINS}))
         else:
-            COINS -= 2 #reduce by two coins
-            inventory[item_id] -= 1 #decrement item by 1
+            COINS -= 2
+            inventory[item_id] -= 1
             with open("vending.json", 'w') as write_file:
                 json.dump(inventory, write_file)
             write_file.close()

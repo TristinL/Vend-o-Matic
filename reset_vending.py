@@ -10,8 +10,8 @@ PASSWORD = "30df3556d16fabda5481d88899945e1c970972d2ed092305696d965385051e92"
 
 #demand a username and password for security purposes
 def reset_vending():
-    user_credentials = input("please enter your username")
-    pass_credentials = input("please enter your password")
+    user_credentials = input("please enter your username: ")
+    pass_credentials = input("please enter your password: ")
     if user_credentials != USERNAME or pass_credentials != PASSWORD:
         print("username or password is incorrect. Please try again")
 
